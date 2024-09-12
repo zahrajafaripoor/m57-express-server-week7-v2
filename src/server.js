@@ -1,39 +1,16 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+
+const connection = require("./db/connection")
  
 const app = express();
  
 app.use(express.json());
  
-// db connection
- 
-const connection = async () =>  {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log("DB is working");
-}
- 
 connection();
  
-// book model
- 
-const bookSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    author: {
-        type: String,
-        required: true,
-    },
-    genre: {
-        type: String,
- 
-    }
-})
- 
-const Book = mongoose.model("book", bookSchema);
+
  
 //routes
  
@@ -88,8 +65,8 @@ app.get("/books/allbooks" , (request, response) => {
  
  
  
-app.listen(5000, () => {
-    console.log("Server is listening on port 5000")
+app.listen(5001, () => {
+    console.log("Server is listening on port 5001")
 });
  
 // import express from "express";
